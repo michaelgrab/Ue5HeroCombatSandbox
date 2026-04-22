@@ -17,7 +17,7 @@ AMyCharacterPawn::AMyCharacterPawn()
 	Camera->SetupAttachment(CameraMesh);
 
 	Camera->FieldOfView = 120.f;
-	Camera->SetRelativeLocation(FVector(-200.0f, 0.0f, 100.0f));
+	Camera->SetRelativeLocation(FVector(-200.0f, 0.0f, 150.0f));
 }
 
 void AMyCharacterPawn::MoveLR(float movementDelta) {

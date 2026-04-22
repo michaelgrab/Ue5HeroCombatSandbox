@@ -6,5 +6,5 @@
 AMyGameModeBase::AMyGameModeBase()
 {
     // It's okay to leave this empty for now!
-    DefaultPawnClass = AMyCharacterPawn::StaticClass();
+    DefaultPawnClass = AMyCharacter::StaticClass();
 }

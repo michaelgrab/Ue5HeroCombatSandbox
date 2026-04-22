@@ -32,7 +32,7 @@ protected:
 	UStaticMeshComponent* CameraMesh;
 
 	UPROPERTY(EditAnywhere, Category="CharacterSettings");
-	float MovementSpeed = 1.0f;
+	float MovementSpeed = 50.0f;
 
 public:	
 	// Called every frame
