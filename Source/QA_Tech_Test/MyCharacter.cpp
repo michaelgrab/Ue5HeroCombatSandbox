@@ -8,7 +8,13 @@ AMyCharacter::AMyCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	ThirdPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
+	check(ThirdPersonCameraComponent != nullptr);
+	ThirdPersonCameraComponent->SetupAttachment(CastChecked<USceneComponent, UCapsuleComponent>(GetCapsuleComponent()));
 
+	ThirdPersonCameraComponent->SetRelativeLocation(FVector(-300.0f, 0.0f, 150.0f));
+	// Enable the pawn to control camera rotation.
+	ThirdPersonCameraComponent->bUsePawnControlRotation = true;
 }
 
 // Called when the game starts or when spawned
