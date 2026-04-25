@@ -51,6 +51,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMyCharacter::StartJump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AMyCharacter::StopJump);
 	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AMyCharacter::PlayHandFastAttackAnimation);
+	PlayerInputComponent->BindAction("KickAttack", IE_Pressed, this, &AMyCharacter::PlayKickAttackAnimation);
 }
 
 void AMyCharacter::MoveForward(float Value)
@@ -86,4 +87,32 @@ void AMyCharacter::PlayHandFastAttackAnimation()
 		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 		AnimInstance->Montage_Play(HandFastAttackMontage);
 	}
+}
+
+void AMyCharacter::PlayKickAttackAnimation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Playing Kick Attack Animation"));
+	if (HandFastAttackMontage && GetMesh() && GetMesh()->GetAnimInstance())
+	{
+		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+		AnimInstance->Montage_Play(KickAttackMontage);
+	}
+}
+
+void AMyCharacter::RegisterAttackHit(AActor* HitActor)
+{
+	if (HitActor && !HitActors.Contains(HitActor))
+	{
+		HitActors.Add(HitActor);
+
+		UE_LOG(LogTemp, Warning, TEXT("Character %s hit %s!"), *GetName(), *HitActor->GetName());
+
+		// Example: Apply actual Unreal damage
+		// UGameplayStatics::ApplyDamage(HitActor, 20.f, GetController(), this, nullptr);
+	}
+}
+
+void AMyCharacter::ClearHitList()
+{
+	HitActors.Empty();
 }

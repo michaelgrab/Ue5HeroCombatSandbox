@@ -6,6 +6,7 @@
 
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "KismetAnimationLibrary.h"
 
 void USK_MannequinAnimInstance::NativeInitializeAnimation()
 {
@@ -28,6 +29,6 @@ void USK_MannequinAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 		FRotator Rotation = myCharacter->GetActorRotation();
 		// angle between -180 and 180
-		groundDirection = CalculateDirection(Velocity, Rotation);
+		groundDirection = UKismetAnimationLibrary::CalculateDirection(Velocity, Rotation);
 	}
 }

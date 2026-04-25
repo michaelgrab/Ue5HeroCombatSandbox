@@ -33,6 +33,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat")
 	UAnimMontage* HandFastAttackMontage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	UAnimMontage* KickAttackMontage;
 	// Handles input for moving forward and backward.
 	UFUNCTION()
 	void MoveForward(float Value);
@@ -51,4 +54,16 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void PlayHandFastAttackAnimation();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	void PlayKickAttackAnimation();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	void RegisterAttackHit(AActor* HitActor);
+
+	void ClearHitList();
+private:
+	UPROPERTY()
+	// Tracks actors hit during the current active animation notify
+	TArray<AActor*> HitActors;
 };
