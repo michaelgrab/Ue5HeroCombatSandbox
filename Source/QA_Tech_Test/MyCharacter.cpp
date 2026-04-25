@@ -50,6 +50,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	// Set up "action" bindings.
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMyCharacter::StartJump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AMyCharacter::StopJump);
+	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AMyCharacter::PlayHandFastAttackAnimation);
 }
 
 void AMyCharacter::MoveForward(float Value)
@@ -75,4 +76,14 @@ void AMyCharacter::StartJump()
 void AMyCharacter::StopJump()
 {
 	bPressedJump = false;
+}
+
+void AMyCharacter::PlayHandFastAttackAnimation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Playing Hand Fast Attack Animation"));
+	if (HandFastAttackMontage && GetMesh() && GetMesh()->GetAnimInstance())
+	{
+		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+		AnimInstance->Montage_Play(HandFastAttackMontage);
+	}
 }

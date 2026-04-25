@@ -31,6 +31,8 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* ThirdPersonCameraComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Combat")
+	UAnimMontage* HandFastAttackMontage;
 	// Handles input for moving forward and backward.
 	UFUNCTION()
 	void MoveForward(float Value);
@@ -46,4 +48,7 @@ public:
 	// Clears jump flag when key is released.
 	UFUNCTION()
 	void StopJump();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	void PlayHandFastAttackAnimation();
 };
