@@ -29,6 +29,9 @@ public:
 	float groundSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="CharacterMovement")
+	float groundDirection;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="CharacterMovement")
 	bool bIsFalling;
 	
 };

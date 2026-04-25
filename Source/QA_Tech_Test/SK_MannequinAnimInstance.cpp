@@ -20,9 +20,14 @@ void USK_MannequinAnimInstance::NativeInitializeAnimation()
 void USK_MannequinAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
-	if (myCharacterMovement)
+	if (myCharacterMovement && myCharacter)
 	{
-		groundSpeed = UKismetMathLibrary::VSizeXY(myCharacterMovement->Velocity);
+		FVector Velocity = myCharacter->GetVelocity();
+		groundSpeed = UKismetMathLibrary::VSizeXY(Velocity);
 		bIsFalling = myCharacterMovement->IsFalling();
+
+		FRotator Rotation = myCharacter->GetActorRotation();
+		// angle between -180 and 180
+		groundDirection = CalculateDirection(Velocity, Rotation);
 	}
 }
