@@ -15,9 +15,6 @@ enum class EAttackLimb : uint8
     LeftFoot     UMETA(DisplayName = "Left Foot")
 };
 
-/**
- * 
- */
 UCLASS()
 class QA_TECH_TEST_API UANS_HandFastPunch : public UAnimNotifyState
 {
