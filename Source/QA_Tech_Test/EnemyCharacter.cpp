@@ -44,6 +44,7 @@ void AEnemyCharacter::PerformAttack()
 {
     if (AttackMontage && !GetMesh()->GetAnimInstance()->Montage_IsPlaying(AttackMontage))
     {
+        UE_LOG(LogTemp, Warning, TEXT("Enemy NPC is performing an attack!"));
         PlayAnimMontage(AttackMontage);
     }
 }

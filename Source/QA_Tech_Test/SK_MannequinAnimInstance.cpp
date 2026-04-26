@@ -2,7 +2,7 @@
 
 
 #include "SK_MannequinAnimInstance.h"
-#include "MyCharacter.h"
+#include "BaseCharacter.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
@@ -11,7 +11,7 @@
 void USK_MannequinAnimInstance::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
-	myCharacter = Cast<AMyCharacter>(TryGetPawnOwner());
+	myCharacter = Cast<ABaseCharacter>(TryGetPawnOwner());
 	if (myCharacter)
 	{
 		myCharacterMovement = myCharacter->GetCharacterMovement();

@@ -20,7 +20,7 @@ public:
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	class AMyCharacter* myCharacter;
+	class ABaseCharacter* myCharacter;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="CharacterMovement")
 	class UCharacterMovementComponent* myCharacterMovement;
