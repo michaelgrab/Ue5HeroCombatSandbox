@@ -25,7 +25,7 @@ protected:
 
     void PerformAttack();
 
-    UPROPERTY(EditAnywhere, Category = "AI")
+    UPROPERTY(EditAnywhere, Category = "Combat")
     UAnimMontage* AttackMontage;
 
     FTimerHandle AttackTimerHandle;

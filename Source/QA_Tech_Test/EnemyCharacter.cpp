@@ -7,7 +7,7 @@ AEnemyCharacter::AEnemyCharacter()
 {
     PawnSensingComp = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComp"));
     PawnSensingComp->SightRadius = 2000.0f;
-    PawnSensingComp->SetPeripheralVisionAngle(45.0f);
+    PawnSensingComp->SetPeripheralVisionAngle(90.0f);
 
 	AIControllerClass = AAIController::StaticClass();
 }
