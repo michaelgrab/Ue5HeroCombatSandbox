@@ -20,8 +20,9 @@ float ABaseCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageE
 	float ActualDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 
 	Health = FMath::Clamp(Health - ActualDamage, 0.0f, MaxHealth);
+	FString DebugMsg = FString::Printf(TEXT("%s takes %.2f damage"), *GetName(), DamageAmount);
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, DebugMsg);
 
-	UE_LOG(LogTemp, Warning, TEXT("%s Health: %f"), *GetName(), Health);
 
 	if (Health <= 0.0f)
 	{

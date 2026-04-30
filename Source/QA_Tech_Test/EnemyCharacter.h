@@ -23,10 +23,17 @@ protected:
     UFUNCTION()
     void OnSeePawn(APawn* SeenPawn);
 
+    void FollowPlayer(APawn* PlayerPawn);
+
     void PerformAttack();
 
     UPROPERTY(EditAnywhere, Category = "Combat")
     UAnimMontage* AttackMontage;
 
+    // I dont know how to use this thing
     FTimerHandle AttackTimerHandle;
+
+
+
+    bool bisFollowingPlayer = false;
 };

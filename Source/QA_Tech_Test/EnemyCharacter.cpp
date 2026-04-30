@@ -6,6 +6,8 @@
 AEnemyCharacter::AEnemyCharacter()
 {
     PawnSensingComp = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComp"));
+	UCharacterMovementComponent* MovementComp = GetCharacterMovement();
+	MovementComp->MaxWalkSpeed = 300.0f;
     PawnSensingComp->SightRadius = 2000.0f;
     PawnSensingComp->SetPeripheralVisionAngle(90.0f);
 
@@ -26,18 +28,25 @@ void AEnemyCharacter::OnSeePawn(APawn* SeenPawn)
 {
     if (SeenPawn->ActorHasTag(FName("Player")))
     {
-        AAIController* AIC = Cast<AAIController>(GetController());
-        if (AIC)
+        float Distance = FVector::Dist(GetActorLocation(), SeenPawn->GetActorLocation());
+        if (Distance < 150.0f)
         {
-            AIC->MoveToActor(SeenPawn, 50.0f); 
-
-            float Distance = FVector::Dist(GetActorLocation(), SeenPawn->GetActorLocation());
-            if (Distance < 150.0f)
-            {
-                PerformAttack();
-            }
+            PerformAttack();
+            return;
         }
+
+		bisFollowingPlayer = true;
+		FollowPlayer(SeenPawn);
     }
+}
+
+void AEnemyCharacter::FollowPlayer(APawn* PlayerPawn)
+{
+    AAIController* AIC = Cast<AAIController>(GetController());
+    if (AIC)
+    {
+        AIC->MoveToActor(PlayerPawn, 50.0f); 
+	}
 }
 
 void AEnemyCharacter::PerformAttack()

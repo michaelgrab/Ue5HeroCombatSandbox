@@ -2,7 +2,7 @@
 
 
 #include "ANS_HandFastPunch.h"
-#include "MyCharacter.h"
+#include "BaseCharacter.h"
 
 void UANS_HandFastPunch::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration, const FAnimNotifyEventReference& EventReference)
 {
@@ -10,7 +10,7 @@ void UANS_HandFastPunch::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequ
 
 	if (MeshComp && MeshComp->GetOwner())
 	{
-		if (AMyCharacter* Character = Cast<AMyCharacter>(MeshComp->GetOwner()))
+		if (ABaseCharacter* Character = Cast<ABaseCharacter>(MeshComp->GetOwner()))
 		{
 			Character->ClearHitList();
 		}
@@ -55,9 +55,10 @@ void UANS_HandFastPunch::NotifyTick(USkeletalMeshComponent* MeshComp, UAnimSeque
 	if (bHit) {
 		for (const FHitResult& Hit : HitResults) {
 			AActor* HitActor = Hit.GetActor();
-			if (HitActor) {
+			ABaseCharacter* MyCharacter = Cast<ABaseCharacter>(Owner);
+			if (HitActor && MyCharacter) {
 				UE_LOG(LogTemp, Warning, TEXT("Hit actor: %s"), *HitActor->GetActorLabel());
-				//MyCharacter->RegisterHit(HitActor);
+				MyCharacter->RegisterAttackHit(HitActor, 50.0f);
 			}
 		}
 	}
