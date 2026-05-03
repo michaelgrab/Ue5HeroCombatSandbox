@@ -14,6 +14,9 @@ class QA_TECH_TEST_API AEnemyCharacter : public ABaseCharacter
 public:
     AEnemyCharacter();
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stats")
+    float MaxWalkSpeed = 500.0f;
+
 protected:
     virtual void BeginPlay() override;
 

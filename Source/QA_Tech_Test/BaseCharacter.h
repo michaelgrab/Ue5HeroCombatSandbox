@@ -14,6 +14,7 @@ class QA_TECH_TEST_API ABaseCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stats")
 	float Health = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Stats")

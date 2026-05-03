@@ -6,8 +6,6 @@
 AEnemyCharacter::AEnemyCharacter()
 {
     PawnSensingComp = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComp"));
-	UCharacterMovementComponent* MovementComp = GetCharacterMovement();
-	MovementComp->MaxWalkSpeed = 300.0f;
     PawnSensingComp->SightRadius = 2000.0f;
     PawnSensingComp->SetPeripheralVisionAngle(90.0f);
 
@@ -17,6 +15,8 @@ AEnemyCharacter::AEnemyCharacter()
 void AEnemyCharacter::BeginPlay()
 {
     Super::BeginPlay();
+    UCharacterMovementComponent* MovementComp = GetCharacterMovement();
+    MovementComp->MaxWalkSpeed = MaxWalkSpeed;
 
     if (PawnSensingComp)
     {

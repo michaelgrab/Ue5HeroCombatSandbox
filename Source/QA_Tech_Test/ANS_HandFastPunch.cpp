@@ -58,7 +58,7 @@ void UANS_HandFastPunch::NotifyTick(USkeletalMeshComponent* MeshComp, UAnimSeque
 			ABaseCharacter* MyCharacter = Cast<ABaseCharacter>(Owner);
 			if (HitActor && MyCharacter) {
 				UE_LOG(LogTemp, Warning, TEXT("Hit actor: %s"), *HitActor->GetActorLabel());
-				MyCharacter->RegisterAttackHit(HitActor, 50.0f);
+				MyCharacter->RegisterAttackHit(HitActor, 20.0f);
 			}
 		}
 	}
