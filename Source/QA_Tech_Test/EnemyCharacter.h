@@ -6,6 +6,8 @@
 
 class UPawnSensingComponent;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChanged, float, HealthPercent);
+
 UCLASS()
 class QA_TECH_TEST_API AEnemyCharacter : public ABaseCharacter
 {
@@ -14,8 +16,13 @@ class QA_TECH_TEST_API AEnemyCharacter : public ABaseCharacter
 public:
     AEnemyCharacter();
 
+    virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Stats")
     float MaxWalkSpeed = 500.0f;
+
+    UPROPERTY(BlueprintAssignable, Category = "Combat")
+    FOnHealthChanged OnHealthChanged;
 
 protected:
     virtual void BeginPlay() override;
@@ -31,12 +38,10 @@ protected:
     void PerformAttack();
 
     UPROPERTY(EditAnywhere, Category = "Combat")
-    UAnimMontage* AttackMontage;
+    UAnimMontage* AttackMontage = nullptr;
 
     // I dont know how to use this thing
     FTimerHandle AttackTimerHandle;
-
-
 
     bool bisFollowingPlayer = false;
 };

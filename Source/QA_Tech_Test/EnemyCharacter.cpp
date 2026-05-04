@@ -2,6 +2,7 @@
 #include "Perception/PawnSensingComponent.h"
 #include "AIController.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/WidgetComponent.h"
 
 AEnemyCharacter::AEnemyCharacter()
 {
@@ -10,6 +11,16 @@ AEnemyCharacter::AEnemyCharacter()
     PawnSensingComp->SetPeripheralVisionAngle(90.0f);
 
 	AIControllerClass = AAIController::StaticClass();
+}
+
+float AEnemyCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) {
+    float ActualDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+    
+    float HealthPercent = Health / MaxHealth;
+    OnHealthChanged.Broadcast(HealthPercent);
+    UE_LOG(LogTemp, Warning, TEXT("The Enemy sets HealthPercent to %f"), HealthPercent);
+
+    return ActualDamage;    
 }
 
 void AEnemyCharacter::BeginPlay()
